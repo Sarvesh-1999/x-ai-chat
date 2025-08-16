@@ -103,12 +103,19 @@ const NewChatPage = () => {
           <div className=" max-h-[80vh] overflow-y-scroll scrollbar-hide p-5 relative">
             {messages.map((message) => {
               return (
-                <div className='shadow my-2 min-h-[105px] rounded-2xl flex items-center gap-3 p-3 bg-[#D7C7F421]'>
-                <img src={message.sender === "user" ? userIcon : aiIcon} className="w-10 h-10 rounded-full" />
+                <div className="shadow my-2 min-h-[105px] rounded-2xl flex items-center gap-3 p-3 bg-[#D7C7F421]">
+                  <img
+                    src={message.sender === "user" ? userIcon : aiIcon}
+                    className="w-10 h-10 rounded-full"
+                  />
                   <div>
-                  <span className='font-bold'>{message.sender === "user" ? "You" : "Soul AI"}</span>
-                  <p className='font-normal text-[16px]'>{message.text}</p>
-                  <span className='text-[12px] font-normal text-[#0000009E]'>{message.timestamp}</span>
+                    <span className="font-bold">
+                      {message.sender === "user" ? "You" : "Soul AI"}
+                    </span>
+                    <p className="font-normal text-[16px]">{message.text}</p>
+                    <span className="text-[12px] font-normal text-[#0000009E]">
+                      {message.timestamp}
+                    </span>
                   </div>
                 </div>
               );

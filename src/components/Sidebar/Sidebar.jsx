@@ -1,5 +1,6 @@
 import newChatIcon from "../../assets/newchatlogo.png";
 import aiIcon from "../../assets/aiIcon.png";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -10,9 +11,11 @@ const Sidebar = () => {
         <img src={newChatIcon} className="h-6 w-6" />
       </div>
 
-      <div className="rounded-[10px] h-10 w-44 bg-[#D7C7F4] mx-auto my-2 flex items-center justify-center font-bold primary-font">
-        Past Conversations
-      </div>
+      <Link to={"/history"}>
+        <div className="rounded-[10px] h-10 w-44 bg-[#D7C7F4] mx-auto my-2 flex items-center justify-center font-bold primary-font">
+          Past Conversations
+        </div>
+      </Link>
     </aside>
   );
 };
