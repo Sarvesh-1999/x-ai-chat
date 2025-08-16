@@ -1,12 +1,12 @@
 import hambugerIcon from "../../assets/hamburger.png";
 import aiIcon from "../../assets/aiIcon.png";
 import userIcon from "../../assets/userIcon.png";
-
 import sampleData from "../../aiData/sampleData.json";
 import QuestionCard from "../QuestionCard/QuestionCard";
 import TextField from "../TextField/TextField";
 import { useContext, useEffect, useState } from "react";
 import { MessageContext } from "../../context/MessageContext";
+import likeAndDislikeIcon from "../../assets/likeAndDislike.png";
 
 const NewChatPage = () => {
   const [input, setInput] = useState("");
@@ -84,6 +84,22 @@ const NewChatPage = () => {
 
   console.log(messages);
 
+  const handleLike = (messageId, isLike) => {
+    setMessages((prev) => {
+      const updated = prev.map((msg) =>
+        msg.id === messageId
+          ? {
+              ...msg,
+              liked: isLike ? !msg.liked : false,
+              disliked: isLike ? false : !msg.disliked,
+            }
+          : msg
+      );
+      localStorage.setItem("pastConversations", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   return (
     <article className="h-screen w-[100%] overflow-y-scroll">
       <header className="flex items-center gap-2.5 px-5 sticky top-0 bg-[#F9FAFA]">
@@ -128,9 +144,30 @@ const NewChatPage = () => {
                       {message.sender === "user" ? "You" : "Soul AI"}
                     </span>
                     <p className="font-normal text-[16px]">{message.text}</p>
-                    <span className="text-[12px] font-normal text-[#0000009E]">
-                      {message.timestamp}
-                    </span>
+
+                    <div className="flex gap-4 items-center">
+                      <span className="text-[12px] font-normal text-[#0000009E]">
+                        {message.timestamp}
+                      </span>
+
+                      {message.sender === "ai" && (
+                        <span className="flex gap-2 items-center">
+                          <button onClick={() => handleLike(message.id, true)}>
+                            <img
+                              src={likeAndDislikeIcon}
+                              className="w-4 h-4 cursor-pointer"
+                            />
+                          </button>
+
+                          <button onClick={() => handleLike(message.id, false)}>
+                            <img
+                              src={likeAndDislikeIcon}
+                              className="w-4 h-4 rotate-180 cursor-pointer"
+                            />
+                          </button>
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               );

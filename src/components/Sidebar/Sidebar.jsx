@@ -8,11 +8,19 @@ const Sidebar = () => {
   const { setMessages } = useContext(MessageContext);
   return (
     <aside className="w-[208px] h-screen bg-white hidden sm:block">
-      <div className="flex justify-evenly items-center h-12 bg-[#D7C7F4]">
-        <img src={aiIcon} className="w-8 h-8" />
-        <button type="button" className="primary-font font-normal cursor-pointer" onClick={() => setMessages([])} >New Chat</button>
-        <img src={newChatIcon} className="h-6 w-6" />
-      </div>
+      <Link to={"/"}>
+        <div className="flex justify-evenly items-center h-12 bg-[#D7C7F4]">
+          <img src={aiIcon} className="w-8 h-8" />
+          <button
+            type="button"
+            className="primary-font font-normal cursor-pointer"
+            onClick={() => setMessages([])}
+          >
+            New Chat
+          </button>
+          <img src={newChatIcon} className="h-6 w-6" />
+        </div>
+      </Link>
 
       <Link to={"/history"}>
         <div className="rounded-[10px] h-10 w-44 bg-[#D7C7F4] mx-auto my-2 flex items-center justify-center font-bold primary-font">

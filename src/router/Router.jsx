@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import NewChatPage from "../components/NewChatPage/NewChatPage";
-import PastConversaion from "../components/PastConversation/PastConversaion";
+import PastConversations from "../components/PastConversations/PastConversations";
 
 export const myRoutes = createBrowserRouter([
     {
@@ -14,7 +14,7 @@ export const myRoutes = createBrowserRouter([
             },
             {
                 path: "/history",
-                element: <PastConversaion />
+                element: <PastConversations />
             }
         ]
     }
