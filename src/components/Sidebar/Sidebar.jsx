@@ -1,13 +1,16 @@
 import newChatIcon from "../../assets/newchatlogo.png";
 import aiIcon from "../../assets/aiIcon.png";
 import { Link } from "react-router-dom";
+import { MessageContext } from "../../context/MessageContext";
+import { useContext } from "react";
 
 const Sidebar = () => {
+  const { setMessages } = useContext(MessageContext);
   return (
     <aside className="w-[208px] h-screen bg-white hidden sm:block">
       <div className="flex justify-evenly items-center h-12 bg-[#D7C7F4]">
         <img src={aiIcon} className="w-8 h-8" />
-        <button className="primary-font font-normal">New Chat</button>
+        <button type="button" className="primary-font font-normal cursor-pointer" onClick={() => setMessages([])} >New Chat</button>
         <img src={newChatIcon} className="h-6 w-6" />
       </div>
 

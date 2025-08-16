@@ -5,11 +5,17 @@ import userIcon from "../../assets/userIcon.png";
 import sampleData from "../../aiData/sampleData.json";
 import QuestionCard from "../QuestionCard/QuestionCard";
 import TextField from "../TextField/TextField";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { MessageContext } from "../../context/MessageContext";
 
 const NewChatPage = () => {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState([]);
+  const { messages, setMessages } = useContext(MessageContext);
+
+  // const [messages, setMessages] = useState(() => {
+  //   const saved = localStorage.getItem("pastConversations");
+  //   return saved ? JSON.parse(saved) : [];
+  // });
 
   const sampleQuestions = [
     {
@@ -67,8 +73,14 @@ const NewChatPage = () => {
     // console.log(aiMessage);
 
     setMessages((prev) => [...prev, userMessage, aiMessage]);
+    localStorage.setItem(
+      "pastConversations",
+      JSON.stringify([...messages, userMessage, aiMessage])
+    );
     setInput("");
   }
+
+  useEffect(() => {}, [messages]);
 
   console.log(messages);
 
@@ -95,15 +107,18 @@ const NewChatPage = () => {
 
             <section className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-5 justify-items-center items-center">
               {sampleQuestions.map((question, index) => {
-                return <QuestionCard key={question.id} card={question} />;
+                return <QuestionCard key={index} card={question} />;
               })}
             </section>
           </>
         ) : (
           <div className=" max-h-[80vh] overflow-y-scroll scrollbar-hide p-5 relative">
-            {messages.map((message) => {
+            {messages.map((message, idx) => {
               return (
-                <div className="shadow my-2 min-h-[105px] rounded-2xl flex items-center gap-3 p-3 bg-[#D7C7F421]">
+                <div
+                  key={idx}
+                  className="shadow my-2 min-h-[105px] rounded-2xl flex items-center gap-3 p-3 bg-[#D7C7F421]"
+                >
                   <img
                     src={message.sender === "user" ? userIcon : aiIcon}
                     className="w-10 h-10 rounded-full"
