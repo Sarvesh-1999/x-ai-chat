@@ -1,16 +1,22 @@
-import { Outlet } from 'react-router-dom'
-import styles from './App.module.css'
 import NewChatPage from './components/NewChatPage/NewChatPage'
+import PastConversations from './components/PastConversations/PastConversations';
 import Sidebar from './components/Sidebar/Sidebar'
-import TextField from './components/TextField/TextField'
-
+import { MessageProvider } from './context/MessageContext';
+import { BrowserRouter as Router , Routes, Route } from 'react-router-dom';
 const App = () => {
   return (
-    <main id={styles.app}>
-     <Sidebar/>
-     <Outlet/>
-    </main>
-  )
-}
+    <MessageProvider>
+      <Router>
+        <main className="h-screen w-full bg-gray-50 flex">
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<NewChatPage />} />
+            <Route path="/history" element={<PastConversations />} />
+          </Routes>
+        </main>
+      </Router>
+    </MessageProvider>
+  );
+};
 
 export default App

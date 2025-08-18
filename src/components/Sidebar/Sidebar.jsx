@@ -5,25 +5,32 @@ import { MessageContext } from "../../context/MessageContext";
 import { useContext } from "react";
 
 const Sidebar = () => {
-  const { setMessages } = useContext(MessageContext);
+  const { setCurrentMessages } = useContext(MessageContext);
+
+  const handleNewChat = () => {
+    setCurrentMessages([]);
+  };
+
   return (
-    <aside className="w-[208px] h-screen bg-white hidden sm:block">
-      <Link to={"/"}>
+    <aside className="w-[208px] h-screen bg-white hidden sm:block ">
+      <Link to="/">
         <div className="flex justify-evenly items-center h-12 bg-[#D7C7F4]">
-          <img src={aiIcon} className="w-8 h-8" />
+          <div className="w-8 h-8  rounded-full flex items-center justify-center">
+            <img src={aiIcon} className="w-6 h-6" alt="Soul AI Icon" />
+          </div>
           <button
             type="button"
-            className="primary-font font-normal cursor-pointer"
-            onClick={() => setMessages([])}
+            className="font-normal cursor-pointer"
+            onClick={handleNewChat}
           >
             New Chat
           </button>
-          <img src={newChatIcon} className="h-6 w-6" />
+          <img className="w-6 h-6" src={newChatIcon} alt="New Chat Icon" />
         </div>
       </Link>
 
-      <Link to={"/history"}>
-        <div className="rounded-[10px] h-10 w-44 bg-[#D7C7F4] mx-auto my-2 flex items-center justify-center font-bold primary-font">
+      <Link to="/history">
+        <div className="rounded-[10px] h-10 w-44 bg-[#D7C7F4] mx-auto my-2 flex items-center justify-center font-bold hover:bg-purple-400">
           Past Conversations
         </div>
       </Link>
