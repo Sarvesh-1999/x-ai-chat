@@ -7,7 +7,7 @@ const TextField = ({ input, setInput, handleSubmit, onSave }) => {
     >
       <input
         className="bg-white w-[70%] rounded-[5px] p-2 border"
-        placeholder="Message Bot AI…"
+        placeholder="Message Bot AI..."
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
